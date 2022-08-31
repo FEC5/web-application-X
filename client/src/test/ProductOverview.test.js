@@ -7,7 +7,7 @@ afterEach(() => {
   cleanup();
 });
 
-test('loads and displays QA heading', () => {
+test('loads and displays Carousel component', () => {
   render(<ProductOverview />);
   const Carousel = screen.getByTestId('Carousel');
 
