@@ -103,22 +103,22 @@ export default function Modal({ currentStyles, setShowModal }) {
     setCurrentImage(productImages[index].url);
   };
 
-  // const [magnify, setMagnify] = useState(false);
-
-  // const handleMagnify = () => {
-  //   setMagnify(!magnify);
-  // };
-
   return(
     <>
       <button
         className={modalStyles.button}
-        onClick={() => {setShowModal(false)}}>
+        onClick={() => {setShowModal(false)}}
+      >
         <span style={{ margin: '10px', color: 'grey' }}>X</span>
       </button>
       <div className={modalStyles.modal}>
           <div className={modalStyles.imgContainer}>
-            {currentIndex === 0 ? <div className={modalStyles.leftArrow}></div> : <div className={modalStyles.leftArrow} onClick={handlePreviousImg}>❮</div>}
+            <div
+              className={modalStyles.leftArrow}
+              onClick={handlePreviousImg}
+            >
+              {currentIndex === 0 ? '' : '❮'}
+            </div>
             {/* IMAGE */}
             <Container
               ref={containerRef}
@@ -135,13 +135,23 @@ export default function Modal({ currentStyles, setShowModal }) {
                 source={currentImage}
               />
             </Container>
-            {/* <div className={modalStyles.zoom}> */}
-              {/* {magnify ? <img className={modalStyles.image} src={currentImage} style={{ transform: 'scale(2.5) translate(20%, 25%)' }} onClick={() => {handleMagnify()}}/> : <img className={modalStyles.image} src={currentImage} onClick={() => {handleMagnify()}}/>} */}
-            {currentIndex === productImages.length - 1 ? <div className={modalStyles.rightArrow}></div> : <div className={modalStyles.rightArrow} onClick={handleNextImg}>❯</div>}
+            <div
+              className={modalStyles.rightArrow}
+              onClick={handleNextImg}
+            >
+              {currentIndex === productImages.length - 1 ? '' : '❯'}
+            </div>
           </div>
         <div className={modalStyles.thumbnailRow}>
           {productImages.map((productImage, index) => (
-            <div className={modalStyles.thumbs} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})`, border: currentIndex === index ? '5px solid lightseagreen' : '' }} />))}
+            <div
+              className={modalStyles.thumbs}
+              onClick={() => {handleThumbnailClick(index)}}
+              id={index}
+              key={index}
+              productimage={productImage}
+              style={{ backgroundImage: `url(${productImage.thumbnail_url})`, border: currentIndex === index ? '5px solid lightseagreen' : '' }}
+            />))}
         </div>
       </div>
     </>

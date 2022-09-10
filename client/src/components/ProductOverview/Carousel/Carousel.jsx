@@ -5,7 +5,6 @@ export default function Carousel({ currentStyles, setShowModal }) {
   const [productImages, setProductImages] = useState([]);
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [borderSpec, setBorderSpec] = useState('none');
 
   const [currentThumbnail, setCurrentThumbnail] = useState('');
 
@@ -43,12 +42,6 @@ export default function Carousel({ currentStyles, setShowModal }) {
     setCurrentImage(productImages[index].url);
   };
 
-  const hideLeftArrow = <div className={carouselstyles.leftArrow}></div>;
-  const showLeftArrow = <div className={carouselstyles.leftArrow} onClick={handlePreviousImg}>❮</div>;
-
-  const hideRightArrow = <div className={carouselstyles.rightArrow}></div>;
-  const showRightArrow = <div className={carouselstyles.rightArrow} onClick={handleNextImg}>❯</div>;
-
   return (
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})`}}>
       <div className={carouselstyles.thumbnailRow}>
@@ -64,8 +57,18 @@ export default function Carousel({ currentStyles, setShowModal }) {
           />))}
       </div>
       <div className={carouselstyles.arrows}>
-        {currentIndex === 0 ? hideLeftArrow : showLeftArrow}
-        {currentIndex === productImages.length - 1 ? hideRightArrow : showRightArrow}
+        <div
+          className={carouselstyles.leftArrow}
+          onClick={handlePreviousImg}
+        >
+          {currentIndex === 0 ? '' : '❮'}
+        </div>
+        <div
+          className={carouselstyles.rightArrow}
+          onClick={handleNextImg}
+        >
+          {currentIndex === productImages.length - 1 ? '' : '❯'}
+        </div>
       </div>
       <div
         className={carouselstyles.lightbox}
