@@ -30,6 +30,8 @@ export default function Modal({ currentStyles, setShowModal }) {
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [currentThumbnail, setCurrentThumbnail] = useState('');
+
   const sourceRef = useRef(null);
   const targetRef = useRef(null);
   const containerRef = useRef(null);
@@ -84,6 +86,7 @@ export default function Modal({ currentStyles, setShowModal }) {
     const newIndex = isFirst ? productImages.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
     setCurrentImage(productImages[newIndex].url);
+    setCurrentThumbnail(productImages[newIndex].thumbnail_url);
   };
 
   const handleNextImg = () => {
@@ -91,9 +94,11 @@ export default function Modal({ currentStyles, setShowModal }) {
     const newIndex = isLast ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
     setCurrentImage(productImages[newIndex].url);
+    setCurrentThumbnail(productImages[newIndex].thumbnail_url);
   };
 
   const handleThumbnailClick = (index) => {
+    setCurrentThumbnail(productImages[index].thumbnail_url);
     setCurrentIndex(index);
     setCurrentImage(productImages[index].url);
   };
@@ -136,7 +141,7 @@ export default function Modal({ currentStyles, setShowModal }) {
           </div>
         <div className={modalStyles.thumbnailRow}>
           {productImages.map((productImage, index) => (
-            <div className={modalStyles.thumbs} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />))}
+            <div className={modalStyles.thumbs} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})`, border: currentIndex === index ? '5px solid lightseagreen' : '' }} />))}
         </div>
       </div>
     </>
