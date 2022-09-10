@@ -4,7 +4,7 @@
   width: 240px;
   height: 320px;
   border: 1px solid black;
-  margin: 10px 8px 10px 0;
+  margin: 10px 0 10px 8px;
   background-color: white;
 }
 
@@ -12,18 +12,12 @@
   box-shadow: 0 0 10px rgba(100, 100, 100, 0.8);
 }
 
-.container:last-child {
-  margin-right: 0;
+.container:first-child {
+  margin-left: 0px;
 }
 
 .container:active:not(:focus-within) {
   outline: 2px solid #0ABAB5;
-}
-
-#add {
-  position: sticky;
-  left: 2px;
-  z-index: 90;
 }
 
 #plus-icon {
@@ -98,3 +92,8 @@ img {
   font-size: 1.1em;
 }
 
+#add {
+  position: sticky;
+  left: 0;
+  z-index: 90;
+}
