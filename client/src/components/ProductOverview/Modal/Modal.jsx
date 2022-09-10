@@ -30,6 +30,8 @@ export default function Modal({ currentStyles, setShowModal }) {
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [currentThumbnail, setCurrentThumbnail] = useState('');
+
   const sourceRef = useRef(null);
   const targetRef = useRef(null);
   const containerRef = useRef(null);
@@ -84,6 +86,7 @@ export default function Modal({ currentStyles, setShowModal }) {
     const newIndex = isFirst ? productImages.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
     setCurrentImage(productImages[newIndex].url);
+    setCurrentThumbnail(productImages[newIndex].thumbnail_url);
   };
 
   const handleNextImg = () => {
@@ -91,29 +94,31 @@ export default function Modal({ currentStyles, setShowModal }) {
     const newIndex = isLast ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
     setCurrentImage(productImages[newIndex].url);
+    setCurrentThumbnail(productImages[newIndex].thumbnail_url);
   };
 
   const handleThumbnailClick = (index) => {
+    setCurrentThumbnail(productImages[index].thumbnail_url);
     setCurrentIndex(index);
     setCurrentImage(productImages[index].url);
   };
-
-  // const [magnify, setMagnify] = useState(false);
-
-  // const handleMagnify = () => {
-  //   setMagnify(!magnify);
-  // };
 
   return(
     <>
       <button
         className={modalStyles.button}
-        onClick={() => {setShowModal(false)}}>
+        onClick={() => {setShowModal(false)}}
+      >
         <span style={{ margin: '10px', color: 'grey' }}>X</span>
       </button>
       <div className={modalStyles.modal}>
           <div className={modalStyles.imgContainer}>
-            {currentIndex === 0 ? <div className={modalStyles.leftArrow}></div> : <div className={modalStyles.leftArrow} onClick={handlePreviousImg}>❮</div>}
+            <div
+              className={modalStyles.leftArrow}
+              onClick={handlePreviousImg}
+            >
+              {currentIndex === 0 ? '' : '❮'}
+            </div>
             {/* IMAGE */}
             <Container
               ref={containerRef}
@@ -130,13 +135,23 @@ export default function Modal({ currentStyles, setShowModal }) {
                 source={currentImage}
               />
             </Container>
-            {/* <div className={modalStyles.zoom}> */}
-              {/* {magnify ? <img className={modalStyles.image} src={currentImage} style={{ transform: 'scale(2.5) translate(20%, 25%)' }} onClick={() => {handleMagnify()}}/> : <img className={modalStyles.image} src={currentImage} onClick={() => {handleMagnify()}}/>} */}
-            {currentIndex === productImages.length - 1 ? <div className={modalStyles.rightArrow}></div> : <div className={modalStyles.rightArrow} onClick={handleNextImg}>❯</div>}
+            <div
+              className={modalStyles.rightArrow}
+              onClick={handleNextImg}
+            >
+              {currentIndex === productImages.length - 1 ? '' : '❯'}
+            </div>
           </div>
         <div className={modalStyles.thumbnailRow}>
           {productImages.map((productImage, index) => (
-            <div className={modalStyles.thumbs} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />))}
+            <div
+              className={modalStyles.thumbs}
+              onClick={() => {handleThumbnailClick(index)}}
+              id={index}
+              key={index}
+              productimage={productImage}
+              style={{ backgroundImage: `url(${productImage.thumbnail_url})`, border: currentIndex === index ? '5px solid lightseagreen' : '' }}
+            />))}
         </div>
       </div>
     </>
