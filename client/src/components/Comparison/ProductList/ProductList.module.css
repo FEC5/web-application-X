@@ -29,7 +29,6 @@ h2.title {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 2px;
 }
 
 .is-adding>:last-child:not(:first-child) {
