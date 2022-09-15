@@ -11,7 +11,7 @@ app.use(express.json());
 app.use('/products', express.static(path.join(__dirname, '../client/dist/')));
 
 app.get('*', (req, res) => {
-  res.status('404').send('<h1 style="text-align:center; margin: 200px">......404 Not Found</h1>');
+  res.status(404).send('<h1 style="text-align:center; margin: 200px">......404 Not Found</h1>');
 });
 
 const PORT = process.env.PORT || 3030;
