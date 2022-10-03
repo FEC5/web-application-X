@@ -31,3 +31,29 @@ Questions and Answers: Amberly\
 Ratings and Reviews: Thomas\
 [![Linkedin: LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/thomashepner/)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hepnerthomas)
+
+### Start the Application Locally
+
+1. Clone the repository locally.
+```
+git clone https://github.com/FEC5/atelier-ecommerce-application.git
+```
+
+2. Install the required dependencies.
+```
+npm install
+```
+
+3. Create a copy of `example.axiosConfig.js`, rename it to `axiosConfig.js`, and add the required API keys.
+
+4. Build the static client-side content.
+```
+npm run build
+```
+
+5. Serve the files with Webpack.
+```
+npm run dev
+```
+
+The application is now live locally at `http://localhost:8080/`.
