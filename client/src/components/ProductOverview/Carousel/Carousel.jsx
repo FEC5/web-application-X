@@ -5,7 +5,8 @@ export default function Carousel({ currentStyles, setShowModal }) {
   const [productImages, setProductImages] = useState([]);
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [borderSpec, setBorderSpec] = useState('none');
+
+  const [currentThumbnail, setCurrentThumbnail] = useState('');
 
   useEffect(() => {
     //
@@ -14,6 +15,7 @@ export default function Carousel({ currentStyles, setShowModal }) {
       if (productImages.length !== 0) {
         setCurrentIndex(0);
         setCurrentImage(productImages[currentIndex].url);
+        setCurrentThumbnail(productImages[currentIndex].url);
       }
     }
   }, [currentStyles, productImages]);
@@ -23,6 +25,7 @@ export default function Carousel({ currentStyles, setShowModal }) {
     const newIndex = isFirst ? productImages.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
     setCurrentImage(productImages[newIndex].url);
+    setCurrentThumbnail(productImages[newIndex].thumbnail_url);
   };
 
   const handleNextImg = () => {
@@ -30,24 +33,14 @@ export default function Carousel({ currentStyles, setShowModal }) {
     const newIndex = isLast ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
     setCurrentImage(productImages[newIndex].url);
-    // console.log('next/newIndex... ', newIndex);
-    // console.log('next/currentImg... ', productImages[newIndex].url);
+    setCurrentThumbnail(productImages[newIndex].thumbnail_url);
   };
-
-  // const selectThumbnail = (index) => document.getElementById(index);
 
   const handleThumbnailClick = (index) => {
+    setCurrentThumbnail(productImages[index].thumbnail_url);
     setCurrentIndex(index);
     setCurrentImage(productImages[index].url);
-    console.log('thumbclick/index... ', index);
-    // console.log('thumbclick/currentImg... ', productImages[index].url);
   };
-
-  const hideLeftArrow = <div className={carouselstyles.leftArrow}></div>;
-  const showLeftArrow = <div className={carouselstyles.leftArrow} onClick={handlePreviousImg}>❮</div>;
-
-  const hideRightArrow = <div className={carouselstyles.rightArrow}></div>;
-  const showRightArrow = <div className={carouselstyles.rightArrow} onClick={handleNextImg}>❯</div>;
 
   return (
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})`}}>
@@ -57,15 +50,25 @@ export default function Carousel({ currentStyles, setShowModal }) {
             className={carouselstyles.thumbnail}
             onClick={() => {handleThumbnailClick(index)}}
             key={index}
+            id={`thumbnail-${index}`}
             tabIndex="1"
             productimage={productImage}
-            style={{ backgroundImage: `url(${productImage.thumbnail_url})` }}
+            style={{ backgroundImage: `url(${productImage.thumbnail_url})`, border: currentIndex === index ? '3px solid lightseagreen' : '' }}
           />))}
-        {/* <div className={carouselstyles.goToNext}>▼</div> */}
       </div>
       <div className={carouselstyles.arrows}>
-        {currentIndex === 0 ? hideLeftArrow : showLeftArrow}
-        {currentIndex === productImages.length - 1 ? hideRightArrow : showRightArrow}
+        <div
+          className={carouselstyles.leftArrow}
+          onClick={handlePreviousImg}
+        >
+          {currentIndex === 0 ? '' : '❮'}
+        </div>
+        <div
+          className={carouselstyles.rightArrow}
+          onClick={handleNextImg}
+        >
+          {currentIndex === productImages.length - 1 ? '' : '❯'}
+        </div>
       </div>
       <div
         className={carouselstyles.lightbox}
