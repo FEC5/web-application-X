@@ -14,6 +14,13 @@
 ### General
 Create a fully functional ecommerce product page for a web store. The main components of this product page were the Product Overview, Related Products, Questions and Answers, and Ratings and Reviews.
 
+### Demo 
+#### Related Products & Your Outfit  
+In this widget, users will be able to check different related products, compare the features, and customize their own outfits. 
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/94769046/195728400-7b3cd63b-f3f6-4b42-82a1-c79eaca69340.gif)
+
+
+
 ### Team
 
 Product Overview: Allan\
